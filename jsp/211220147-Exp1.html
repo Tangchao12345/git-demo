@@ -1,0 +1,222 @@
+﻿<!DOCTYPE >
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>实验1-147：静态网页设计</title>
+	<style type="text/css">
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			margin: 0px auto;
+			height: auto;
+			width: 800px;
+			border: 1px solid #006633;
+		}
+		#header {
+			height: 50px;
+			width: 800px;
+			background-image: url(211220147-bg.jpg);
+			background-repeat: repeat;	/*不需要重复时用no-repeat*/
+			margin: 0px 0px 3px 0px;
+		}
+		#navigator { /*定义一个导航栏的长盒子*/
+			height: 25px;
+			width: 800px;
+			font-size: 14px;
+			list-style-type: none; /*让nav这个大盒子下面的小盒子LI列表样式不显示,这对于标准浏览器很重要*/
+		}
+
+		#navigator li {
+			float: left; /*让LI这些小盒子左对齐*/
+		}
+
+		#navigator li a {
+			color: #ffffff;
+			text-decoration: none; /*让LI盒子里面的链接样式没有下滑线*/
+			padding-top: 4px;
+			display: block; /*让LI里面的链接块状呈现，就像一个按钮，而不必一定要点中链接文字才起作用*/
+			width: 131px;
+			height: 22px;
+			text-align: center;
+			background-color: #009966;
+			margin-left: 2px;
+		}
+
+		#navigator li a:hover {
+			background-color: #006633; /*鼠标移到链接盒子上面改变盒子背景色*/
+			color: #FFFF00;
+		}
+		#content {
+			height: auto;
+			width: 780px;
+			line-height: 1.5em;
+			padding: 10px;
+		}
+
+		#content p {
+			text-indent: 2em;
+		}
+
+		#content h3 {
+			font-size: 16px;
+			margin: 10px;
+		}
+		#footer {
+			height: 23px;
+			width: 780px;
+			line-height: 2em;
+			text-align: center;
+			color: #ffffff;
+			background-color: #009966;
+			padding: 3px;
+		}
+		#invform {
+			padding-left: 100px;
+			background-color: #ccffcc;
+		}
+		#formlayout tr {
+			height:20px;
+		}
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		function valid147(form){
+			//验证非空
+			if(form.name.value.length==0||form.email.value.length==0||form.student_id.value.length==0||form.birthday.value.length==0){
+				alert("请填写信息")
+				return false;
+			}
+
+			//验证生日
+			var exp_birthday=/^(?:(?!0000)[0-9]{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
+			if(!exp_birthday.test(document.forms[0].birthday.value)){
+				alert("生日错误")
+				document.forms[0].birthday.focus();
+				return false;
+			}
+
+			//验证邮箱
+			var exp_email=/^\w+((-\w+)|(\.\w))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+			if(!exp_email.test(document.forms[0].email.value)){
+				alert("邮箱错误")
+				document.forms[0].email.focus();
+				return false;
+			}
+			
+			//验证学号
+			var exp_student_id=/^(?:[0-9]{2}|99)(?:[0-9]{4})(?:[1-9])(?:[0-9]{2})$/;
+			if(!exp_student_id.test(form.student_id.value)){
+				alert("学号错误")
+				form.student_id.focus();
+				return false;
+			}
+			else{
+				return true
+			}
+
+		}
+	</script>
+</head>
+
+<body>
+	<div id="header"></div>
+	<div id="navigator">
+		<ul id="navigator">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">实验一</a></li>
+			<li><a href="#">实验二</a></li>
+			<li><a href="#">实验三</a></li>
+			<li><a href="#">论坛</a></li>
+			<li><a href="#">帮助</a></li>
+		</ul>
+	</div>
+	<div id="content">
+		<h3>《动态网站开发》课程&nbsp;&nbsp;实验一</h3>
+		<h4>【实验目的】</h4>
+		<p>1．掌握HTML+CSS网页布局技术，熟悉网页Table布局，熟悉使用CSS对网页元素风格进行统一设计。</p>
+		<p>2．掌握网页表单的设计，熟悉如下常用表单元素的使用：文本框与密码框、单选按钮与复选框、按钮、文件域、下拉列表、文本区。</p>
+		<p>3．掌握JavaScript客户端动态交互编程技术，实现客户端输入信息验证。</p>
+		<h4>【实验内容】</h4>
+
+		<div id="invform">
+			<h3 style="padding-left:160px;">立信学生用户注册</h3>
+			<form action="" >
+			<table id="formlayout">
+				<tr>
+					<td style="text-align:right;">姓名：</td>
+					<td><input type="text" name="name" value=""></td>
+				</tr>
+				
+				<!-- 在这里添加其它表单元素 -->
+				<tr>
+					<td style="text-align:right;">性别</td>
+					<td>
+						<input type="radio" value="male name="sex" checked />男
+						<input type="radio" value="female name="sex" />女
+					</td>
+				</tr>
+				
+				<!-- 结束添加 -->
+				<tr>
+					<td style="text-align:right;">生日</td>
+					<td><input type="text" id="birthday" name="birthday" value="2003-07-09" required>
+					<td>
+				
+				</tr>
+
+				<tr>
+					<td style="text-align:right;">出生地：</td>
+					<td>
+						<select name ="出生地">
+							<option value="江苏" selected>江苏
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">电子邮箱：</td>
+					<td><input type="email" id="email" name="email" >
+					</td>
+				</tr> 
+				<tr>
+					<td style="text-align:right;">学号：</td>
+					<td> <input type="text" id="student_id" name="student_id" >
+					</td>
+				</tr> 
+				<tr>
+					<td style="text-align:right;">喜欢的音乐：</td>
+					<td>
+						<input type="checkbox" value="古典" name="favorite_music" checked>古典     
+						<input type="checkbox" value="流行" name="favorite_music" checked>流行    
+						<input type="checkbox" value="西洋" name="favorite_music" checked>西洋  
+						<input type="checkbox" value="娱乐" name="favorite_music" checked>娱乐 
+					</td>
+				</tr> 
+				<tr>
+					<td style="text-align:right;">个人描述：</td>
+					<td> <textarea  name="personal_description" rows="4" cols="50"></textarea>
+					</td>
+				</tr> 
+
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" value="提交" name="submit" onclick="return valid147(this.form)"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="reset" value="重置" name="reset"/>
+					</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+
+	</div>
+	<div id="footer">
+		<p>上海立信会计金融学院&nbsp;&nbsp;信息管理学院&nbsp;&nbsp;《动态网站开发》课程实验</p>
+	</div>
+</body>
+
+</html>
